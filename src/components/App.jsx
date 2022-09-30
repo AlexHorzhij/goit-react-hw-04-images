@@ -45,13 +45,14 @@ export function App () {
         top: window.innerHeight*2,
         behavior: "smooth",
     });
-}
+  }
 
   useEffect(() => {
     if (searchImg === '') {
       setData([])
       return;
-    }
+    };
+
     setLoader(true)
     getImages(searchImg, page)
       .then((response) => {
