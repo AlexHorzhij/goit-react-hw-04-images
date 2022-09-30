@@ -20,24 +20,35 @@ export function App () {
   const openModal = (e) => {
     const imgIndex = e.target.id;
     const largeImage = data[imgIndex];
+    console.log("lllllll")
 
     setImageModal(largeImage);
     setModalShow(true);
+    document.addEventListener('keydown', modalClose);
   };
 
-  const closeModal = () => {
-    setImageModal('');
-    setModalShow(false);
+  const modalClose = (e) => {
+    const { target, currentTarget } = e;
+    console.log(e)
+    if (e.code === 'Escape' || target === currentTarget) {
+      console.log("event", e)
+      document.removeEventListener('keydown', modalClose);
+      setImageModal('');
+      setModalShow(false);
+    };
   };
-  
+
   const LoadMore = () => {
     setPage(state => state + 1);
-    console.log(window.innerHeight);
   };
 
   const searchImage = (e) => {
+    if (searchImg === e.search && page === 1) {
+      return;
+    }
+    setPage(1);
+    setData([]);
     setSearchImg(e.search)
-    setPage(1)
   };
 
   function scrollGallery() {
@@ -61,16 +72,16 @@ export function App () {
       .catch(error => console.log(error))
       .finally(()=>
       {
-        setLoader(false);
         scrollGallery();
+        setLoader(false);
       }
       )    
-  }, [page, searchImg])
+  }, [searchImg, page])
 
   return <Wrapper>
     <Searchbar  searchImage={searchImage} />   
     <ImageGallery images={data} openModal={openModal} />
-    {modalShow && <Modal img={imageModal} closeModal={closeModal} />}
+    {modalShow && <Modal img={imageModal} modalClose={modalClose} />}
     {data.length > 0 && <LoadButton LoadMore={LoadMore} />}
     {loader && <Loader/>}
   </Wrapper>
