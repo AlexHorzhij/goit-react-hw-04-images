@@ -20,7 +20,6 @@ export function App () {
   const openModal = (e) => {
     const imgIndex = e.target.id;
     const largeImage = data[imgIndex];
-    console.log("lllllll")
 
     setImageModal(largeImage);
     setModalShow(true);
@@ -51,12 +50,12 @@ export function App () {
     setSearchImg(e.search)
   };
 
-  function scrollGallery() {
-    window.scrollBy({
-        top: window.innerHeight*2,
-        behavior: "smooth",
-    });
-  }
+  // function scrollGallery() {
+  //   window.scrollBy({
+  //       top: window.innerHeight*2,
+  //       behavior: "smooth",
+  //   });
+  // }
 
   useEffect(() => {
     if (searchImg === '') {
@@ -72,7 +71,7 @@ export function App () {
       .catch(error => console.log(error))
       .finally(()=>
       {
-        scrollGallery();
+        // scrollGallery();
         setLoader(false);
       }
       )    
