@@ -23,7 +23,7 @@ export function App () {
 
     setImageModal(largeImage);
     setModalShow(true);
-    document.addEventListener('keydown', modalClose);
+    // document.addEventListener('keydown', modalClose);
   };
 
   const modalClose = (e) => {
@@ -31,7 +31,7 @@ export function App () {
     console.log(e)
     if (e.code === 'Escape' || target === currentTarget) {
       console.log("event", e)
-      document.removeEventListener('keydown', modalClose);
+      // document.removeEventListener('keydown', modalClose);
       setImageModal('');
       setModalShow(false);
     };
